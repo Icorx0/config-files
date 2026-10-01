@@ -46,9 +46,22 @@ file; `install.sh` then installs the matching packages.
 
 ## Themes
 The `themes/` folder stores Catppuccin **Mocha** (dark) and **Latte** (light)
-variants for Alacritty, Neovim, and Tmux. The active configs currently use
-Latte; to switch, copy the relevant snippet from `themes/` into the live config
-(see `themes/README.md`).
+variants for Alacritty, Neovim, and Tmux.
+
+Switching is a one-liner and needs **no commit**. Set `THEME` in your `.env`
+(which is gitignored) and apply it:
+
+```
+THEME = mocha    # or: latte
+```
+```make theme```
+
+The live configs import a generated theme file rather than inlining colors, so
+a theme switch only rewrites generated files and never dirties a tracked
+config. Alacritty picks it up instantly via `live_config_reload`, tmux is
+reloaded by the script, and Neovim applies it on next start.
+
+See `themes/README.md` for how the pieces fit together.
 
 ## Notes → Google Drive Sync (rclone)
 A systemd user timer mirrors `~/Documents/Notes` to Google Drive once a day.

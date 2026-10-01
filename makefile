@@ -9,7 +9,12 @@ include .env
 HOME := $(HOME)
 
 .DEFAULT_GOAL := collect
-.PHONY: collect apply
+.PHONY: collect apply theme
+
+# Target to apply the Catppuccin variant named by THEME in .env.
+# Theme switches only rewrite generated files, so they need no commit.
+theme:
+	@./themes/apply-theme.sh
 
 # Target to copy dotfiles from the system into this repository.
 collect:

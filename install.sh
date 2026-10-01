@@ -4,7 +4,7 @@
 # 1. Reading the .env file to see which applications are enabled.
 # 2. Installing the necessary system packages for those applications.
 # 3. Running post-install setups (e.g., lazy.nvim, Nerd Fonts).
-# 4. Applying the collected dotfiles using the Makefile.
+# 4. Applying the collected dotfiles and the selected theme using the Makefile.
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
@@ -164,8 +164,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Applying dotfiles for: $ENABLED..."
     # Run 'make apply' as the original user to ensure correct file ownership.
     sudo -u "$SUDO_USER" make apply
+    # The configs import a generated theme file, so it must exist before first use.
+    sudo -u "$SUDO_USER" make theme
 else
-    echo "Skipping dotfile application. You can run 'make apply' later to finish."
+    echo "Skipping dotfile application. You can run 'make apply && make theme' later to finish."
 fi
 
 echo "All done!"
