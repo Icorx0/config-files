@@ -1,0 +1,8 @@
+[Unit]
+Description=Mirror ~/Documents/Books to Google Drive (rclone)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/Projects/config-files/rclone/sync-folder.sh %h/Documents/Books DriveBruno:Books

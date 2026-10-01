@@ -5,4 +5,4 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=%h/Projects/config-files/rclone/sync-notes.sh
+ExecStart=%h/Projects/config-files/rclone/sync-folder.sh %h/Documents/Notes DriveBruno:Notes

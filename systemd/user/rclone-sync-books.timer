@@ -1,0 +1,12 @@
+[Unit]
+Description=Daily rclone sync of Books to Google Drive
+
+[Timer]
+# Fire once a day (midnight). Persistent catches up a run missed while off.
+OnCalendar=daily
+Persistent=true
+# Spread the load a little so it doesn't fire exactly on the second.
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target
