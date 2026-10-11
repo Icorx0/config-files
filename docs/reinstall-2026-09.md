@@ -54,6 +54,8 @@ here — only where they live.
     the `includeIf gitdir:` identity, DB restored from the pg_dumpall, Claude
     sessions. Postgres published on `127.0.0.1` only. The laptop keeps no
     ReddVest data and no Docker data.
+    **Reversed on 2026-10-01** — it came back to the ThinkPad under
+    `~/Projects/`; then see "2026-10-11" below.
 
 ## Desktop
 
@@ -80,7 +82,7 @@ here — only where they live.
 5. ThinkPad-only data removed from the desktop; osu! songs and the ThinkPad's
    Minecraft worlds + mods merged into the desktop's.
 6. **Reeco**: the ThinkPad's working copy is the one kept; its secrets live
-   inside the project folder.
+   inside the project folder. **Deleted 2026-10-11** — see below.
 7. **Google Drive (rclone remote `DriveBruno`)**:
    - `~/.local/bin/familia-sync` — Drive `Familia` → `~/Documents/Familia`
      (`copy --ignore-existing`, never `sync`, so local-only files survive).
@@ -101,3 +103,37 @@ here — only where they live.
   ("volume is dirty"); `sudo ntfsfix -d /dev/sdX1` clears it.
 - rclone with the shared client ID is slow on Drive (~1–2 MiB/s); an own
   OAuth client (consent screen "In production") and a current rclone help.
+
+## 2026-10-11 — one project instead of four
+
+Reeco and ReddVest were retired on purpose, not lost. What they were trying to
+build continues as **`dynamic-ast`**: `~/Projects/dynamic-ast` on the ThinkPad,
+one private repo `github.com/Icorx0/dynamic-ast`, with `backend/` (FastAPI,
+schema per company) and `frontend/` (Next.js) in the same tree.
+
+- **Reeco: deleted.** 4 commits and 87 never-committed files; its own author
+  would not have been able to read it back. The GitHub repo goes too.
+- **`ReddVest/{reddvest-backend,reddvest-frontend,landing-frontend}`:
+  archived** on GitHub — read-only, full history. The two unpushed backend
+  commits were pushed first so the archive is complete. The landing is the only
+  place the Terms / Privacy / data-handling pages exist.
+- The brand files and the ReddVest org's **GitHub recovery codes** are in
+  `~/Documents/reddvest-retired/` — the org still owns the archived repos, so
+  those codes are not disposable.
+- History in the new repo starts at one commit, deliberately: what the old
+  history recorded was a sequence of names the project no longer uses.
+- The dev database was carried over by `pg_dump --no-owner --no-acl` and
+  verified row-for-row, into volume `dynamic-ast_db-data`, database and role
+  `dynamic_ast`. It still contains two Django-era tenant schemas
+  (`altiplano`, `pacifico`) from the pre-rebuild implementation; the FastAPI
+  engine only uses `meta` and `data`.
+- **Claude conversations follow the folder**: `~/.claude/projects/` is keyed by
+  slugified cwd, so the directory was renamed to
+  `-home-icorx0-Projects-dynamic-ast` and the `cwd` fields inside the
+  transcripts rewritten, on both machines, plus the `project` fields in
+  `history.jsonl`. Resuming by id works from the new folder; `.claude.json`
+  still holds the old path as a key, which only costs one trust prompt.
+- **idea-searching moved to the desktop** (`desktop:~/Projects/idea-searching`,
+  12 GB) and left the ThinkPad. Its `.mcp.json` declares a gmail server whose
+  credentials (`~/.gmail-mcp/`) are on neither machine — dead since the
+  reinstall; re-auth would be needed.
